@@ -1,0 +1,58 @@
+.row > .col,
+.row > [class^="col-"] {
+  border: 1px solid rgba(86, 61, 124, 0.2);
+}
+
+.row-key {
+  text-align: right;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: rgba(86, 61, 124, 0.15);
+}
+
+.row-value-input-text {
+  width: 99%;
+  height: 100%;
+  margin: auto;
+  display: block;
+}
+
+.row-value-input-text-inline {
+    height: 22px;
+}
+
+.outer {
+  display: table;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+.inner {
+  margin-left: auto;
+  margin-right: auto;
+  /* Whatever width you want */
+}
+
+label {
+  margin-bottom: 0px;
+  vertical-align: text-bottom;
+}
+
+.boxsizingBorder {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+.no-border {
+  border: 0px !important;
+}
+.no-padding {
+  padding: 0px;
+}

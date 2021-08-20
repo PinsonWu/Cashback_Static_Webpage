@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/myCss.css">
+
+    <script src="./assets/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container mt-4">
+
+        <div class="row">
+            <div class="col-2 row-key">
+                <div class="outer">
+                    <div class="middle">
+                        <div class="inner pr-3">
+                            *回饋條件
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-2">
+                <div>
+                    <input type="radio" checked name="cashbackCondition" id="cashbackConditionSingle">
+                    <label for="cashbackConditionSingle">單筆消費須達</label>
+                    <input type="text" class="row-value-input-text-inline" style="width:100px;" name=""
+                        id="cashbackConditionSingleValue">
+                    <label for="cashbackConditionSingle">元，(單筆不限金額時，請設 1 元)</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="cashbackCondition" id="cashbackConditionMultiple">
+                    <label for="cashbackConditionMultiple">多筆累計消費須達</label>
+                    <input type="text" class="row-value-input-text-inline" style="width:100px;" name=""
+                        id="cashbackConditionMultipleValue">
+                    <label for="cashbackConditionMultiple">元</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2 row-key">
+                <div class="outer">
+                    <div class="middle">
+                        <div class="inner pr-3">
+                            *回饋方式
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-2">
+                <div>
+                    <input type="radio" id="cashbackMethodFixed" name="cashbackMethod" value="cashbackMethodFixed"
+                        onclick="groupRadioCashbackMethodClicked(event)">
+                    <label for="cashbackMethodFixed">固定金額回饋:</label>
+                    <div id="cashbackMethodFixedDiv" style="color:gainsboro" class="pl-4">
+                        <div>
+                            <input type="radio" disabled name="accumulatingFlag" id="accumulatingFlagFalse">
+                            <label for="accumulatingFlagFalse">
+                                不累贈，回饋金額固定為
+                                <input type="text" class="row-value-input-text-inline" disabled style="width:100px"
+                                    name="" id="accumulatingFlagFalseValue">
+                                元
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" disabled name="accumulatingFlag" id="accumulatingFlagTrue">
+                            <label for="accumulatingFlagTrue">
+                                可累贈，交易金額每滿
+                                <input type="text" class="row-value-input-text-inline" disabled style="width:100px"
+                                    name="" id="accumulatingFlagTrueCondition">
+                                元，回饋
+                                <input type="text" class="row-value-input-text-inline" disabled style="width:100px"
+                                    name="" id="accumulatingFlagTrueCashValue">
+                                元
+                            </label>
+                        </div>
+                    </div>
+
+                    <input type="radio" id="cashbackMethodPercent" name="cashbackMethod" value="cashbackMethodPercent"
+                        onclick="groupRadioCashbackMethodClicked(event)">
+                    <label for="cashbackMethodPercent">
+                        回饋比例: <input type="text" class="row-value-input-text-inline" disabled style="width:28px" name=""
+                            id="cashbackMethodPercentValue">%
+                    </label>
+                    <div id="cashbackMethodPercentDiv" style="color:gainsboro" class="pl-4">
+                        <input type="radio" disabled name="roundOrFloorFlag" id="roundOrFloorFlagRound">
+                        <label for="roundOrFloorFlagRound">小數點後四捨五入</label>
+                        <input type="radio" disabled name="roundOrFloorFlag" id="roundOrFloorFlagFloor">
+                        <label for="roundOrFloorFlagFloor">小數點無條件捨取去</label>
+                    </div>
+
+                    <input type="radio" id="cashbackMethodStep" name="cashbackMethod" value="cashbackMethodStep"
+                        onclick="groupRadioCashbackMethodClicked(event)">
+                    <label for="cashbackMethodStep">級距回饋:</label>
+                    <button type="button" disabled id="cashbackMethodStepAddNewStep"
+                        onclick="cashbackMethodStepAddNewStepClick()" class="btn btn-primary btn-sm"
+                        style="margin-top: -5px;">新增級距</button>
+                    <div id="cashbackMethodStepDiv" style="color:gainsboro" class="pl-4">
+                        <div id="cashbackMethodStepStart">
+                            新台幣
+                            <input type="text" name="" id="cashbackMethodStepStart0" class="row-value-input-text-inline"
+                                disabled style="width:100px"> 元 ~
+                            <input type="text" name="" id="cashbackMethodStepStart1" class="row-value-input-text-inline"
+                                disabled style="width:100px"> 元，回饋
+                            <input type="text" name="" id="cashbackMethodStepStartValue"
+                                class="row-value-input-text-inline" disabled style="width:100px"> 元
+                        </div>
+                        <div id="cashbackMethodStepEnd">
+                            新台幣
+                            <input type="text" name="" id="cashbackMethodStepEnd0" class="row-value-input-text-inline"
+                                disabled style="width:100px">元以上，回饋
+                            <input type="text" name="" id="cashbackMethodStepEndValue"
+                                class="row-value-input-text-inline" disabled style="width:100px">元
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2 row-key">
+                <div class="outer">
+                    <div class="middle">
+                        <div class="inner pr-3">
+                            *回饋上限
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-2">
+                <input type="checkbox" name="" id="cashbackSingleLimit" onclick="cashbackSingleLimitClicked(event)">
+                <label id="cashbackSingleLimitDiv" for="cashbackSingleLimit">符合條件之單筆回饋上限為
+                    <input type="text" disabled name="" id="cashbackSingleLimitValue"
+                        class="row-value-input-text-inline" disabled style="width:100px">元
+                </label>
+                <br>
+
+                <div id="cashbackRestrictionDiv">
+                    <label>
+                        <input type="checkbox" name="" id="cashbackRestriction"
+                            onclick="cashbackRestrictionClicked(event)">
+                        限定條件
+                    </label>
+                    <div id="cashbackRestrictionDivChild" class="pl-4">
+                        <div id="cashbackRestrictionPerDayDiv" style="color:gainsboro">
+                            <label>
+                                <input disabled type="radio" name="cashbackRestrictionChild"
+                                    id="cashbackRestrictionPerDay" onclick="cashbackRestrictionChildClicked(event)">
+                                每日
+                            </label>
+                            <div id="cashbackRestrictionPerDayChildDiv" class="pl-4" style="color:gainsboro">
+                                <label>
+                                    <input disabled type="radio" name="restrictionPerDayMoneyMoneyOrCount"
+                                        id="restrictionPerDayMoney">最高回饋
+                                        <input type="text" name="" id="restrictionPerDayMoneyValue" class="row-value-input-text-inline"
+                                        disabled style="width:100px">元
+                                </label>
+                                <label>
+                                    <input disabled type="radio" name="restrictionPerDayMoneyMoneyOrCount"
+                                        id="restrictionPerDayCount">最多回饋
+                                        <input type="text" name="" id="restrictionPerDayMoneyCount" class="row-value-input-text-inline"
+                                        disabled style="width:100px">次
+                                </label>
+                            </div>
+                        </div>
+                        <div id="cashbackRestrictionInTheWaveDiv" style="color:gainsboro">
+                            <label>
+                                <input disabled type="radio" name="cashbackRestrictionChild"
+                                    id="cashbackRestrictionInTheWave" onclick="cashbackRestrictionChildClicked(event)">
+                                此波活動期間
+                            </label>
+                            <div id="cashbackRestrictionInTheWaveChildDiv" class="pl-4" style="color:gainsboro">
+                                <label>
+                                    <input disabled type="radio" name="restrictionInTheWaveCountOrCount"
+                                        id="restrictionInTheWaveMoney">最高回饋
+                                        <input type="text" name="" id="restrictionInTheWaveMoneyValue" class="row-value-input-text-inline"
+                                        disabled style="width:100px">元
+                                </label>
+                                <label>
+                                    <input disabled type="radio" name="restrictionInTheWaveCountOrCount"
+                                        id="restrictionInTheWaveCount">最多回饋
+                                        <input type="text" name="" id="restrictionInTheWaveMoneyCount" class="row-value-input-text-inline"
+                                        disabled style="width:100px">次
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mt-5"></div>
+
+    <script src="./assets/js/myJs.js"></script>
+
+<button onclick="f21() || f311() || f321()">click</button>
+<button onclick="f21() || f311() || f322()">click</button>
+<button onclick="f21() || f311() || f323()">click</button>
+<button onclick="f21() || f311() || f324()">click</button>
+<button onclick="f21() || f311() || f325()">click</button>
+<button onclick="f21() || f312() || f321()">click</button>
+<button onclick="f21() || f312() || f322()">click</button>
+<button onclick="f21() || f312() || f323()">click</button>
+<button onclick="f21() || f312() || f324()">click</button>
+<button onclick="f21() || f312() || f325()">click</button>
+<button onclick="f22() || f311() || f321()">click</button>
+<button onclick="f22() || f311() || f322()">click</button>
+<button onclick="f22() || f311() || f323()">click</button>
+<button onclick="f22() || f311() || f324()">click</button>
+<button onclick="f22() || f311() || f325()">click</button>
+<button onclick="f22() || f312() || f321()">click</button>
+<button onclick="f22() || f312() || f322()">click</button>
+<button onclick="f22() || f312() || f323()">click</button>
+<button onclick="f22() || f312() || f324()">click</button>
+<button onclick="f22() || f312() || f325()">click</button>
+<button onclick="f23() || f311() || f321()">click</button>
+<button onclick="f23() || f311() || f322()">click</button>
+<button onclick="f23() || f311() || f323()">click</button>
+<button onclick="f23() || f311() || f324()">click</button>
+<button onclick="f23() || f311() || f325()">click</button>
+<button onclick="f23() || f312() || f321()">click</button>
+<button onclick="f23() || f312() || f322()">click</button>
+<button onclick="f23() || f312() || f323()">click</button>
+<button onclick="f23() || f312() || f324()">click</button>
+<button onclick="f23() || f312() || f325()">click</button>
+<button onclick="f24() || f311() || f321()">click</button>
+<button onclick="f24() || f311() || f322()">click</button>
+<button onclick="f24() || f311() || f323()">click</button>
+<button onclick="f24() || f311() || f324()">click</button>
+<button onclick="f24() || f311() || f325()">click</button>
+<button onclick="f24() || f312() || f321()">click</button>
+<button onclick="f24() || f312() || f322()">click</button>
+<button onclick="f24() || f312() || f323()">click</button>
+<button onclick="f24() || f312() || f324()">click</button>
+<button onclick="f24() || f312() || f325()">click</button>
+<button onclick="f25() || f311() || f321()">click</button>
+<button onclick="f25() || f311() || f322()">click</button>
+<button onclick="f25() || f311() || f323()">click</button>
+<button onclick="f25() || f311() || f324()">click</button>
+<button onclick="f25() || f311() || f325()">click</button>
+<button onclick="f25() || f312() || f321()">click</button>
+<button onclick="f25() || f312() || f322()">click</button>
+<button onclick="f25() || f312() || f323()">click</button>
+<button onclick="f25() || f312() || f324()">click</button>
+<button onclick="f25() || f312() || f325()">click</button>
+
+</body>
+
+</html>
+<!-- todo: adding new bank -->

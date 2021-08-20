@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/myCss.css">
+
+    <script src="./assets/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container mt-5 d-none">
+        <div class="row">
+            <div class="col-2 row-key">活動類型</div>
+            <div class="col p-2">
+                特店回饋活動(
+                <input type="checkbox" id="canSupportBonusReward" name="canSupportBonusReward" value="Boat">
+                <label for="canSupportBonusReward">支援紅利回饋)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 row-key">*表單編號</div>
+            <div class="col p-1">
+                <input class="row-value-input-text" type="text" id="activityNumber">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 row-key">*活動名稱</div>
+            <div class="col p-1">
+                <input class="row-value-input-text" type="text" id="activityName">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 row-key">*入帳備註</div>
+            <div class="col p-1">
+                <input class="row-value-input-text" type="text" id="accountNote">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 row-key">*活動內容</div>
+            <div class="col p-2">
+                <textarea style="width:100%" name="" cols="30" rows="10" id="activityDescription"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 row-key">*交易類型</div>
+            <div class="col p-2">
+                <input type="checkbox" id="shopping" name="shopping" value="shopping">
+                <label for="shopping">購物</label>
+                <input class="ml-3" type="checkbox" id="pay" name="pay" value="pay">
+                <label for="pay">繳費</label>
+                <input class="ml-3" type="checkbox" id="payTax" name="payTax" value="payTax">
+                <label for="payTax">繳稅</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 row-key">
+                <div class="outer">
+                    <div class="middle">
+                        <div class="inner px-3">
+                            *支付類型
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-2">
+                <div>
+                    <input type="checkbox" id="financialCard" name="financialCard" value="financialCard"
+                        onclick="groupCheckboxClicked(event, 'financialCardSpan', ['financialCardMainScan', 'financialCardBeScaned'])">
+                    <label for="financialCard">金融卡</label>:
+                    <span>&nbsp</span>
+                    <span id="financialCardSpan" style="color: gainsboro;">
+                        <input type="checkbox" disabled id="financialCardMainScan" name="financialCardMainScan"
+                            value="financialCardMainScan">
+                        <label for="financialCardMainScan">主掃(含中轉頁)</label>
+                        <input type="checkbox" disabled id="financialCardBeScaned" name="financialCardBeScaned"
+                            value="financialCardBeScaned">
+                        <label for="financialCardBeScaned">被掃</label>
+                    </span>
+                </div>
+                <div>
+                    <input type="checkbox" id="creditCard" name="creditCard" value="creditCard"
+                        onclick="groupCheckboxClicked(event, 'creditCardSpan', ['creditCardScan', 'creditCardBeScaned'])">
+                    <label for="creditCard">信用卡</label>:
+                    <span>&nbsp</span>
+                    <span id="creditCardSpan" style="color: gainsboro;">
+                        <input type="checkbox" disabled id="creditCardScan" name="creditCardScan"
+                            value="creditCardScan">
+                        <label for="creditCardScan">主掃(含中轉頁) </label>
+                        <input type="checkbox" disabled id="creditCardBeScaned" name="creditCardBeScaned"
+                            value="creditCardBeScaned">
+                        <label for="creditCardBeScaned">被掃</label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 row-key">
+                <div class="outer">
+                    <div class="middle">
+                        <div class="inner px-3">
+                            *主辦單位
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-2">
+                <div>主辦銀行：
+                    <input class="row-value-input-text-inline" style="width:36px" type="text" id="hostBank">
+                    (只能輸入一個銀行代號)
+                </div>
+                <div>合作銀行：</div>
+                <div class="container">
+                    <div class="row justify-content-around">
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="cooperatingBank004" name="cooperatingBank004"
+                                value="cooperatingBank004">
+                            <label for="cooperatingBank004">004 台灣銀行</label>
+                        </div>
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="cooperatingBank005" name="cooperatingBank005"
+                                value="cooperatingBank005">
+                            <label for="cooperatingBank005">005 臺灣土地銀行</label>
+                        </div>
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="cooperatingBank006" name="cooperatingBank006"
+                                value="cooperatingBank006">
+                            <label for="cooperatingBank006">006 合作金庫商業銀行</label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-around">
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="cooperatingBank007" name="cooperatingBank007"
+                                value="cooperatingBank007">
+                            <label for="cooperatingBank007">007 第一商業銀行</label>
+                        </div>
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="cooperatingBank008" name="cooperatingBank008"
+                                value="cooperatingBank008">
+                            <label for="cooperatingBank008">008 華南商業銀行</label>
+                        </div>
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="cooperatingBank009" name="cooperatingBank009"
+                                value="cooperatingBank009">
+                            <label for="cooperatingBank009">009 彰化商業銀行</label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-around">
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="cooperatingBank017" name="cooperatingBank017"
+                                value="cooperatingBank017">
+                            <label for="cooperatingBank017">017 兆豐國際商業銀行</label>
+                        </div>
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="cooperatingBank050" name="cooperatingBank050"
+                                value="cooperatingBank050">
+                            <label for="cooperatingBank050">050 臺灣中小企業銀行 </label>
+                        </div>
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="cooperatingBank700" name="cooperatingBank700"
+                                value="cooperatingBank700">
+                            <label for="cooperatingBank700">700 中華郵政</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 row-key">
+                <div class="outer">
+                    <div class="middle">
+                        <div class="inner px-3">
+                            *參加機構
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-2">
+                <div>
+                    <input type="text" id="AddingParticipatingBankInput" placeholder="請輸入銀行名稱或代號">
+                    <button type="button" id="AddingParticipationgBankButton" class="btn btn-primary btn-sm"
+                        style="margin-top: -5px;">新增</button>
+                </div>
+                <div class="container mt-2">
+                    <div class="row justify-content-around">
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="participatingBank004" name="participatingBank004"
+                                value="participatingBank004">
+                            <label for="participatingBank004">004 台灣銀行</label>
+                        </div>
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="participatingBank005" name="participatingBank005"
+                                value="participatingBank005">
+                            <label for="participatingBank005">005 臺灣土地銀行</label>
+                        </div>
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="participatingBank006" name="participatingBank006"
+                                value="participatingBank006">
+                            <label for="participatingBank006">006 合作金庫商業銀行</label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-around">
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="participatingBank007" name="participatingBank007"
+                                value="participatingBank007">
+                            <label for="participatingBank007">007 第一商業銀行</label>
+                        </div>
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="participatingBank008" name="participatingBank008"
+                                value="participatingBank008">
+                            <label for="participatingBank008">008 華南商業銀行</label>
+                        </div>
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="participatingBank009" name="participatingBank009"
+                                value="participatingBank009">
+                            <label for="participatingBank009">009 彰化商業銀行</label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-around">
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="participatingBank017" name="participatingBank017"
+                                value="participatingBank017">
+                            <label for="participatingBank017">017 兆豐國際商業銀行</label>
+                        </div>
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="participatingBank050" name="participatingBank050"
+                                value="participatingBank050">
+                            <label for="participatingBank050">050 臺灣中小企業銀行 </label>
+                        </div>
+                        <div class="col no-border no-padding">
+                            <input type="checkbox" id="participatingBank700" name="participatingBank700"
+                                value="participatingBank700">
+                            <label for="participatingBank700">700 中華郵政</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    設定轉紅利銀行：
+                    <input class="row-value-input-text-inline" style="width:220px" type="text" name=""
+                        id="bonusRewardBankInput">
+                    (多個銀行代碼使用「,」分隔)
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 row-key">
+                <div class="outer">
+                    <div class="middle pr-3">
+                        <div class="inner">*活動總金額</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-2">
+                活動總金額:<input id="activityTotalMoney" class="row-value-input-text-inline" style="width:80px" type="text"
+                    value="1000000">元
+                (財金公司計<input id="FiscMoney" class="row-value-input-text-inline" style="width:80px" type="text">元，
+                主辦行計<input id="HostBankMoney" class="row-value-input-text-inline" style="width:80px" type="text">元)
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 第N波 -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-2 row-key">活動名稱</div>
+            <div class="col p-2" id="activityNameShow">
+                activityNameShow
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 row-key">活動類型</div>
+            <div class="col p-2" id="activityTypeShow">
+                特店現金回饋活動
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 row-key">活動波段</div>
+            <div class="col p-2" id="activityWaveShow">
+                首波
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 row-key">
+                <div class="outer">
+                    <div class="middle">
+                        <div class="inner pr-3">
+                            *此波活動期間
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-2" id="waveDatetime">
+                <input type="datetime-local" name="bdaytime">
+                <input type="datetime-local" name="bdaytime">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 row-key">
+                <div class="outer">
+                    <div class="middle">
+                        <div class="inner pr-3">
+                            *特定時間
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-2" id="SpecificTime">
+                <div>
+                    <input type="radio" onclick="groupRadioSpwcificTimeClicked(event)" id="unspecified"
+                        name="SpecificTime" value="unspecified">
+                    <label for="unspecified">不指定</label>
+                </div>
+                <div>
+                    <input type="radio" onclick="groupRadioSpwcificTimeClicked(event)" id="perWeek" name="SpecificTime"
+                        value="perWeek">
+                    <label class="mr-2" for="perWeek">每週:</label>
+                    <div id="perWeekDiv" style="color:gainsboro;" class="pl-4">
+                        <input type="checkbox" disabled name="perWeek1" id="perWeek1">
+                        <label for="perWeek1">週一</label>
+                        <input type="checkbox" disabled name="perWeek2" id="perWeek2">
+                        <label for="perWeek2">週二</label>
+                        <input type="checkbox" disabled name="perWeek3" id="perWeek3">
+                        <label for="perWeek3">週三</label>
+                        <input type="checkbox" disabled name="perWeek4" id="perWeek4">
+                        <label for="perWeek4">週四</label>
+                        <input type="checkbox" disabled name="perWeek5" id="perWeek5">
+                        <label for="perWeek5">週五</label>
+                        <input type="checkbox" disabled name="perWeek6" id="perWeek6">
+                        <label for="perWeek6">週六</label>
+                        <input type="checkbox" disabled name="perWeek0" id="perWeek0">
+                        <label for="perWeek0">週日</label>
+                    </div>
+                </div>
+                <div>
+                    <input type="radio" onclick="groupRadioSpwcificTimeClicked(event)" id="perMonth" name="SpecificTime"
+                        value="perMonth">
+                    <label for="perMonth">每月:</label>
+                    <div id="perMonthDiv" style="color:gainsboro;" class="container pl-4">
+                        <div class="row">
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth01" id="perMonth01">
+                                <label for="perMonth01">01</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth02" id="perMonth02">
+                                <label for="perMonth02">02</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth03" id="perMonth03">
+                                <label for="perMonth03">03</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth04" id="perMonth04">
+                                <label for="perMonth04">04</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth05" id="perMonth05">
+                                <label for="perMonth05">05</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth06" id="perMonth06">
+                                <label for="perMonth06">06</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth07" id="perMonth07">
+                                <label for="perMonth07">07</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth08" id="perMonth08">
+                                <label for="perMonth08">08</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth09" id="perMonth09">
+                                <label for="perMonth09">09</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth10" id="perMonth10">
+                                <label for="perMonth10">10</label>
+                            </div>
+                            <div class="col no-border"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth11" id="perMonth11">
+                                <label for="perMonth11">11</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth12" id="perMonth12">
+                                <label for="perMonth12">12</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth13" id="perMonth13">
+                                <label for="perMonth13">13</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth14" id="perMonth14">
+                                <label for="perMonth14">14</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth15" id="perMonth15">
+                                <label for="perMonth15">15</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth16" id="perMonth16">
+                                <label for="perMonth16">16</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth17" id="perMonth17">
+                                <label for="perMonth17">17</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth18" id="perMonth18">
+                                <label for="perMonth18">18</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth19" id="perMonth19">
+                                <label for="perMonth19">19</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth20" id="perMonth20">
+                                <label for="perMonth20">20</label>
+                            </div>
+                            <div class="col no-border"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth21" id="perMonth21">
+                                <label for="perMonth21">21</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth22" id="perMonth22">
+                                <label for="perMonth22">22</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth23" id="perMonth23">
+                                <label for="perMonth23">23</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth24" id="perMonth24">
+                                <label for="perMonth24">24</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth25" id="perMonth25">
+                                <label for="perMonth25">25</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth26" id="perMonth26">
+                                <label for="perMonth26">26</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth27" id="perMonth27">
+                                <label for="perMonth27">27</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth28" id="perMonth28">
+                                <label for="perMonth28">28</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth29" id="perMonth29">
+                                <label for="perMonth29">29</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth30" id="perMonth30">
+                                <label for="perMonth30">30</label>
+                            </div>
+                            <div class="col no-border">
+                                <input disabled type="checkbox" name="perMonth31" id="perMonth31">
+                                <label for="perMonth31">31</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <input type="radio" onclick="groupRadioSpwcificTimeClicked(event)" id="specified"
+                        name="SpecificTime" value="specified">
+                    <label for="specified">特定時段:</label>
+                    <div id="specifiedDiv" style="color:gainsboro" class="pl-4">
+                        <input type="time" disabled name="specifiedStart" id="specifiedStart">
+                        ~
+                        <input type="time" disabled name="specifiedEnd" id="specifiedEnd">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2 row-key">
+                <div class="outer">
+                    <div class="middle">
+                        <div class="inner pr-3">
+                            *回饋條件
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-2">
+                <div>
+                    <input type="radio" name="cashbackCondition" id="cashbackConditionSingle">
+                    <label for="cashbackConditionSingle">單筆消費須達</label>
+                    <input type="text" class="row-value-input-text-inline" style="width:100px;" name=""
+                        id="cashbackConditionSingleValue">
+                    <label for="cashbackConditionSingle">元，(單筆不限金額時，請設 1 元)</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="cashbackCondition" id="cashbackConditionMultiple">
+                    <label for="cashbackConditionMultiple">多筆累計消費須達</label>
+                    <input type="text" class="row-value-input-text-inline" style="width:100px;" name=""
+                        id="cashbackConditionMultipleValue">
+                    <label for="cashbackConditionMultiple">元</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-2 row-key">
+                <div class="outer">
+                    <div class="middle">
+                        <div class="inner pr-3">
+                            *回饋方式
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-2">
+                <div>
+                    <input type="radio" id="cashbackMethodFixed" name="cashbackMethod" value="cashbackMethodFixed"
+                        onclick="groupRadioCashbackMethodClicked(event)">
+                    <label for="cashbackMethodFixed">固定金額回饋:</label>
+                    <div id="cashbackMethodFixedDiv" style="color:gainsboro" class="pl-4">
+                        <div>
+                            <input type="radio" disabled name="accumulatingFlag" id="accumulatingFlagFalse">
+                            <label for="accumulatingFlagFalse">
+                                不累贈，回饋金額固定為
+                                <input type="text" class="row-value-input-text-inline" disabled style="width:100px"
+                                    name="" id="accumulatingFlagFalseValue">
+                                元
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" disabled name="accumulatingFlag" id="accumulatingFlagTrue">
+                            <label for="accumulatingFlagTrue">
+                                可累贈，交易金額每滿
+                                <input type="text" class="row-value-input-text-inline" disabled style="width:100px"
+                                    name="" id="accumulatingFlagTrueCondition">
+                                元，回饋
+                                <input type="text" class="row-value-input-text-inline" disabled style="width:100px"
+                                    name="" id="accumulatingFlagTrueCashValue">
+                                元
+                            </label>
+                        </div>
+                    </div>
+
+                    <input type="radio" id="cashbackMethodPercent" name="cashbackMethod" value="cashbackMethodPercent"
+                        onclick="groupRadioCashbackMethodClicked(event)">
+                    <label for="cashbackMethodPercent">
+                        回饋比例: <input type="text" class="row-value-input-text-inline" disabled style="width:24px" name=""
+                            id="cashbackMethodPercentValue">%
+                    </label>
+                    <div id="cashbackMethodPercentDiv" style="color:gainsboro" class="pl-4">
+                        <input type="radio" disabled name="roundOrFloorFlag" id="roundOrFloorFlagRound">
+                        <label for="roundOrFloorFlagRound">小數點後四捨五入</label>
+                        <input type="radio" disabled name="roundOrFloorFlag" id="roundOrFloorFlagFloor">
+                        <label for="roundOrFloorFlagFloor">小數點無條件捨取去</label>
+                    </div>
+
+                    <input type="radio" id="cashbackMethodStep" name="cashbackMethod" value="cashbackMethodStep"
+                        onclick="groupRadioCashbackMethodClicked(event)">
+                    <label for="cashbackMethodStep">級距回饋:</label>
+                    <button type="button" disabled id="cashbackMethodStepAddNewStep"
+                        onclick="cashbackMethodStepAddNewStepClick()" class="btn btn-primary btn-sm"
+                        style="margin-top: -5px;">新增級距</button>
+                    <div id="cashbackMethodStepDiv" style="color:gainsboro" class="pl-4">
+                        <div id="cashbackMethodStepStart">
+                            新台幣
+                            <input type="text" name="" id="cashbackMethodStepStart0" class="row-value-input-text-inline"
+                                disabled style="width:100px"> 元 ~
+                            <input type="text" name="" id="cashbackMethodStepStart1" class="row-value-input-text-inline"
+                                disabled style="width:100px"> 元，回饋
+                            <input type="text" name="" id="cashbackMethodStepStartValue"
+                                class="row-value-input-text-inline" disabled style="width:100px"> 元
+                        </div>
+                        <div id="cashbackMethodStepEnd">
+                            新台幣
+                            <input type="text" name="" id="cashbackMethodStepEnd0" class="row-value-input-text-inline"
+                                disabled style="width:100px">元以上，回饋
+                            <input type="text" name="" id="cashbackMethodStepEndValue"
+                                class="row-value-input-text-inline" disabled style="width:100px">元
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2 row-key">
+                <div class="outer">
+                    <div class="middle">
+                        <div class="inner pr-3">
+                            *回饋上限
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-2">
+                <input type="checkbox" name="" id="cashbackSingleLimit" onclick="cashbackSingleLimitClicked(event)">
+                <label id="cashbackSingleLimitDiv" for="cashbackSingleLimit">符合條件之單筆回饋上限為
+                    <input type="text" disabled name="" id="cashbackSingleLimitValue"
+                        class="row-value-input-text-inline" disabled style="width:100px">元
+                </label>
+                <br>
+
+                <div id="cashbackRestrictionDiv">
+                    <label>
+                        <input type="checkbox" name="" id="cashbackRestriction"
+                            onclick="cashbackRestrictionClicked(event)">
+                        限定條件
+                    </label>
+                    <div id="cashbackRestrictionDivChild" class="pl-4">
+                        <div id="cashbackRestrictionPerDayDiv" style="color:gainsboro">
+                            <label>
+                                <input disabled type="radio" name="cashbackRestrictionChild"
+                                    id="cashbackRestrictionPerDay" onclick="cashbackRestrictionChildClicked(event)">
+                                每日
+                            </label>
+                            <div id="cashbackRestrictionPerDayChildDiv" class="pl-4" style="color:gainsboro">
+                                <label>
+                                    <input disabled type="radio" name="restrictionPerDayMoneyMoneyOrCount"
+                                        id="restrictionPerDayMoney">最高回饋元
+                                </label>
+                                <label>
+                                    <input disabled type="radio" name="restrictionPerDayMoneyMoneyOrCount"
+                                        id="restrictionPerDayCount">最多回饋次
+                                </label>
+                            </div>
+                        </div>
+                        <div id="cashbackRestrictionInTheWaveDiv" style="color:gainsboro">
+                            <label>
+                                <input disabled type="radio" name="cashbackRestrictionChild"
+                                    id="cashbackRestrictionInTheWave" onclick="cashbackRestrictionChildClicked(event)">
+                                此波活動期間
+                            </label>
+                            <div id="cashbackRestrictionInTheWaveChildDiv" class="pl-4" style="color:gainsboro">
+                                <label>
+                                    <input disabled type="radio" name="restrictionInTheWaveCountOrCount"
+                                        id="restrictionInTheWaveMoney">最高回饋元
+                                </label>
+                                <label>
+                                    <input disabled type="radio" name="restrictionInTheWaveCountOrCount"
+                                        id="restrictionInTheWaveCount">最多回饋次
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+
+    <div class="mt-5"></div>
+
+
+    <script src="./assets/js/myJs.js"></script>
+
+</body>
+
+</html>
+<!-- todo: adding new bank -->
